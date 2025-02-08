@@ -14,4 +14,24 @@ cmake --build .
 cmake --build build
 ## The above command will generate a binary which has the same name as the executable defined in CMakeLists.txt
 ## In this project it creates a cpp_project binary under the build directory
+
+#To run the program run
+> build/cpp_project
+
+Opened database successfully
+
+Command executed successfully
+
+Command executed successfully
+
+Select command output:
+ID: 1
+NAME: Paul
+AGE: 32
+ADDRESS: California
+SALARY: 20000.0
+
+Command executed successfully
+
+Closed database successfully
 ```
