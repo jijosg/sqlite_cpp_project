@@ -1,21 +1,25 @@
-cmake_minimum_required(VERSION 3.31.5)
+cmake_minimum_required(VERSION 4.00)
+project(cProject LANGUAGES C)
 
-# Set the project name
-project(MyCppProject VERSION 0.2)
-
-
-# Specify the C++ standard
-set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_STANDARD_REQUIRED True)
+# Find math and pthread library
+find_library(MATH m REQUIRED)
 find_package(SQLite3 REQUIRED)
 
-include(FetchContent)
-FetchContent_Declare(cpr GIT_REPOSITORY https://github.com/libcpr/cpr.git
-                         GIT_TAG dec9422db3af470641f8b0d90e4b451c4daebf64) # Replace with your desired git commit from: https://github.com/libcpr/cpr/releases
-FetchContent_MakeAvailable(cpr)
-# Add the executable
-add_executable(cpp_project main.cpp)
-# Add cxxopts header file from the include directory
-target_sources(cpp_project PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/src/sqllite_models.cpp)
-target_include_directories(cpp_project PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include)
-target_link_libraries(cpp_project PRIVATE cpr::cpr SQLite::SQLite3)
+# Create HEADER-ONLY library
+add_library(HEADER-ONLY INTERFACE)
+# Add project lib
+add_library(PROJECTLIB INTERFACE)
+# Add directory "include/" to target library
+target_include_directories(HEADER-ONLY INTERFACE ${CMAKE_SOURCE_DIR}/include)
+# Add directory "lib/" to target library
+target_include_directories(PROJECTLIB INTERFACE ${CMAKE_SOURCE_DIR}/lib)
+
+# Target link math to HEADER-ONLY
+target_link_libraries(HEADER-ONLY INTERFACE ${MATH})
+# Target link HEADER-ONLY to PROJECTLIB
+target_link_libraries(HEADER-ONLY INTERFACE PROJECTLIB)
+# Create a binary executable
+add_executable(main main.c)
+
+# Link HEADER-ONLY and SQLite3 to main
+target_link_libraries(main PRIVATE HEADER-ONLY ${SQLite3_LIBRARIES})

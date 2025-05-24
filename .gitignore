@@ -1,4 +1,48 @@
 # Prerequisites
+# Compiled object files
+*.o
+*.lo
+*.la
+
+# Compiled dynamic libraries
+*.so
+*.dll
+*.dylib
+
+# Compiled static libraries
+*.a
+*.lib
+
+# Executable files
+*.exe
+*.out
+*.app
+
+# Precompiled headers
+*.gch
+*.pch
+
+# Build directories
+build/
+cmake-build-*/
+
+# Dependency files
+*.d
+
+# Logs and databases
+*.log
+*.sql
+*.sqlite
+*.db
+
+# IDE and editor folders
+.vscode/
+.idea/
+*.swp
+*~
+
+# Generated files
+*.generated.*
 *.d
 
 # Compiled Object files
