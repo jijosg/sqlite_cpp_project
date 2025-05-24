@@ -1,4 +1,4 @@
-# sqlite_cpp_project
+# sqlite_c_project
 
 Trying out c using cmake and sqlite3
 
